@@ -50,7 +50,7 @@ function Navbar() {
                 onChange={handleChange}
                 className="header__select_category"
                 sx={{
-                  background: "#C5C5C5",
+                  background: "#C5C5C5"
                 }}
               >
                 <MenuItem value="">All</MenuItem>
@@ -92,7 +92,7 @@ function Navbar() {
 
         <div>
           <Box>
-            <FormControl fullWidth>
+            <FormControl fullWidth sx={{color: '#fff'}}>
               <Select
                 labelId="category"
                 id="category"
@@ -101,6 +101,7 @@ function Navbar() {
                 displayEmpty
                 onChange={handleChangeLocation}
                 className=""
+                
               >
                 <MenuItem value="">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Flag_of_the_United_States_%281822-1836%29.svg" alt="flag" height={20} width={30} />
