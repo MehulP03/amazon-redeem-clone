@@ -1,7 +1,6 @@
 import React from "react";
 import "./Header.css";
 import SearchIcon from "@mui/icons-material/Search";
-import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import {
   Box,
@@ -131,7 +130,8 @@ function Navbar() {
         </div>
 
         <div className="header__optionBasket">
-          <AddShoppingCartOutlinedIcon />
+        <div src="" className="cart__image" ></div>
+          {/* <img src="https://ik.imagekit.io/amazon1234/sprite_350x_q7QZkJCVl.png?updatedAt=1627121934264" alt="cart"/> */}
           <span className="header__optionLineTwo header__basketCount">
             cart
           </span>
