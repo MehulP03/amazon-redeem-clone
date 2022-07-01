@@ -1,230 +1,146 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert';
+import React from "react";
+import "./Header.css";
+import SearchIcon from "@mui/icons-material/Search";
+import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import {
+  Box,
+  FormControl,
+  MenuItem,
+  Select,
+} from "@mui/material";
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: "#F9F6EE",
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
-}));
+function Navbar() {
+  const [category, setCategory] = React.useState("");
+  const [location, setLocation] = React.useState("");
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '80ch',
-    },
-  },
-}));
-
-export default function Navbar() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleChange = (event) => {
+    setCategory(event.target.value);
   };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
+  const handleChangeLocation = (event) => {
+    setLocation(event.target.value);
   };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
-      </MenuItem>
-    </Menu>
-  );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ bgcolor:'#111' }}>
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block', padding:'5px' } }}
-          >
-            <img src="https://i0.wp.com/www.dafontfree.co/wp-content/uploads/2021/11/Amazon-Logo-Font-1-scaled.jpg?resize=2560%2C1578&ssl=1" alt='logo' height={60} width={150} />
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon sx={{ color:'#111' }} />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
+    <div className="header">
+        <img className="header__logo" src="/assets/logo.PNG" alt="logo" />
+        <div>
+          <div className="location-button">
+            <div>
+              <LocationOnOutlinedIcon />
+            </div>
+            <div>
+              Deliver to
+              <br />
+              <span style={{ fontSize: "12px", fontWeight: "700" }}>U.S.A</span>
+            </div>
+          </div>
+        </div>
+        <div className="header__search">
+          <Box>
+            <FormControl
+              fullWidth
+              sx={{ maxHeight: "150px", background: "#C5C5C5" }}
             >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+              <Select
+                labelId="category"
+                id="category"
+                value={category}
+                label="Category"
+                displayEmpty
+                onChange={handleChange}
+                className="header__select_category"
+                sx={{
+                  background: "#C5C5C5",
+                }}
+              >
+                <MenuItem value="">All</MenuItem>
+                <MenuItem value="All Departments">All Departments</MenuItem>
+                <MenuItem value="Arts & Crafts">Arts & Crafts</MenuItem>
+                <MenuItem value="Automotive">Automotive</MenuItem>
+                <MenuItem value="Baby">Baby</MenuItem>
+                <MenuItem value="Beauty & Personal Care">
+                  Beauty & Personal Care
+                </MenuItem>
+                <MenuItem value="Books">Books</MenuItem>
+                <MenuItem value="Boys' Fashion">Boys' Fashion</MenuItem>
+                <MenuItem value="Computers">Computers</MenuItem>
+                <MenuItem value="">All</MenuItem>
+                <MenuItem value="All Departments">All Departments</MenuItem>
+                <MenuItem value="Arts & Crafts">Arts & Crafts</MenuItem>
+                <MenuItem value="Automotive">Automotive</MenuItem>
+                <MenuItem value="Baby">Baby</MenuItem>
+                <MenuItem value="Beauty & Personal Care">
+                  Beauty & Personal Care
+                </MenuItem>
+                <MenuItem value="Books">Books</MenuItem>
+                <MenuItem value="Boys' Fashion">Boys' Fashion</MenuItem>
+                <MenuItem value="Computers">Computers</MenuItem>
+                <MenuItem value="">All</MenuItem>
+                <MenuItem value="All Departments">All Departments</MenuItem>
+                <MenuItem value="Arts & Crafts">Arts & Crafts</MenuItem>
+                <MenuItem value="Automotive">Automotive</MenuItem>
+                <MenuItem value="Baby">Baby</MenuItem>
+              </Select>
+            </FormControl>
           </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
+          {/* </div> */}
+          <input className="header__searchInput" type="text" />
+          <a href="/" className="header__searchIcon">
+            <SearchIcon />
+          </a>
+        </div>
+
+        <div>
+          <Box>
+            <FormControl fullWidth>
+              <Select
+                labelId="category"
+                id="category"
+                value={location}
+                label="Category"
+                displayEmpty
+                onChange={handleChangeLocation}
+                className=""
+              >
+                <MenuItem value="">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Flag_of_the_United_States_%281822-1836%29.svg" alt="flag" height={20} width={30} />
+                </MenuItem>
+                <MenuItem value="All Departments">All Departments</MenuItem>
+                <MenuItem value="Arts & Crafts">Arts & Crafts</MenuItem>
+                <MenuItem value="Automotive">Automotive</MenuItem>
+                <MenuItem value="Baby">Baby</MenuItem>
+                <MenuItem value="Beauty & Personal Care">
+                  Beauty & Personal Care
+                </MenuItem>
+                <MenuItem value="Books">Books</MenuItem>
+                <MenuItem value="Boys' Fashion">Boys' Fashion</MenuItem>
+                <MenuItem value="Computers">Computers</MenuItem>
+              </Select>
+            </FormControl>
           </Box>
-        </Toolbar>
-      </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
-    </Box>
+        </div>
+        <div className="header__option">
+          <span className="header__optionLineOne">Hello, Sign in</span>
+          <span className="header__optionLineTwo">Account & Lists</span>
+        </div>
+
+        <div className="header__option">
+          <span className="header__optionLineOne">Returns</span>
+          <span className="header__optionLineTwo">& Orders</span>
+        </div>
+
+        <div className="header__optionBasket">
+          <AddShoppingCartOutlinedIcon />
+          <span className="header__optionLineTwo header__basketCount">
+            cart
+          </span>
+        </div>
+    </div>
   );
 }
+
+export default Navbar;
+
+
+// <span className="header__optionLineOne">Hello, Sign in</span>
